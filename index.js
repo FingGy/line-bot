@@ -20,6 +20,9 @@ const client = new Client(config);
 
 // app.use(middleware(config));
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send("LINE Bot is running ✅");
+});
 
 app.post("/webhook", (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
@@ -28,10 +31,6 @@ app.post("/webhook", (req, res) => {
       console.error(err);
       res.status(500).end();
     });
-});
-
-app.get('/', (req, res) => {
-  res.send("LINE Bot is running ✅");
 });
 
 function handleEvent(event) {
