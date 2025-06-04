@@ -18,7 +18,7 @@ const config = {
 const app = express();
 const client = new Client(config);
 
-app.use(middleware(config));
+// app.use(middleware(config));
 app.use(express.json());
 
 app.post("/webhook", (req, res) => {
