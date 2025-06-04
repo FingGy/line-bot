@@ -30,6 +30,10 @@ app.post("/webhook", (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+  res.send("LINE Bot is running ✅");
+});
+
 function handleEvent(event) {
   if (event.type !== "message" || event.message.type !== "text") {
     return Promise.resolve(null);
@@ -64,6 +68,7 @@ function handleEvent(event) {
 }
 
 const port = process.env.PORT || 3000;
+
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
