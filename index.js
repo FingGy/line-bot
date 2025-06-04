@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   res.send("LINE Bot is running ✅");
 });
 
-app.post("/webhook", (req, res) => {
+app.post("/webhook", middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
