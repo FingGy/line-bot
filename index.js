@@ -18,19 +18,20 @@ const config = {
 const app = express();
 const client = new Client(config);
 
-// app.use(middleware(config));
+app.use(middleware(config));
 app.use(express.json());
-app.get('/', (req, res) => {
-  res.send("LINE Bot is running ✅");
-});
 
-app.post("/webhook", middleware(config), (req, res) => {
+app.post("/webhook", (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
       console.error(err);
       res.status(500).end();
     });
+});
+
+app.get('/', (req, res) => {
+  res.send("LINE Bot is running ✅");
 });
 
 function handleEvent(event) {
