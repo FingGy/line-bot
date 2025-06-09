@@ -31,7 +31,7 @@ app.post("/webhook", middleware(config), (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  console.log("✅ GET / ถูกเรียกแล้ว");
+  console.log("✅ GET ");
   res.send("LINE Bot is running ✅");
 });
 
