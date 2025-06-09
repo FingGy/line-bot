@@ -137,6 +137,4 @@ function createStyledLcFlex(mcNumber) {
   };
 }
 
-module.exports = {
-  createStyledLcFlex
-};
+module.exports = { createStyledLcFlex };

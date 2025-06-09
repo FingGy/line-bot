@@ -18,19 +18,28 @@ const config = {
 const app = express();
 const client = new Client(config);
 
-app.use(middleware(config));
-app.use(express.json());
+// app.use(express.json());
 
-app.post("/webhook", (req, res) => {
+app.get("/", (req, res) => {
+  console.log("=== GET / ถูกเรียก ===");
+  try {
+    res.send("LINE Bot is running ✅");
+  } catch (err) {
+    console.error("GET / error:", err);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.post("/webhook", middleware(config), (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
-      console.error(err);
+      console.error("Error in webhook:", err);
       res.status(500).end();
     });
 });
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send("LINE Bot is running ✅");
 });
 
