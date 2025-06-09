@@ -21,6 +21,7 @@ const client = new Client(config);
 // app.use(express.json());
 
 app.post("/webhook", middleware(config), (req, res) => {
+  console.log("📩 Webhook hit:", JSON.stringify(req.body));
   Promise.all(req.body.events.map(handleEvent))
     .then((result) => res.json(result))
     .catch((err) => {
@@ -30,6 +31,7 @@ app.post("/webhook", middleware(config), (req, res) => {
 });
 
 app.get("/", (req, res) => {
+  console.log("✅ GET / ถูกเรียกแล้ว");
   res.send("LINE Bot is running ✅");
 });
 
